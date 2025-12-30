@@ -1,463 +1,416 @@
+/* --- Global Reset & Fonts --- */
 :root {
-    /* פלטת צבעים מודרנית - Fintech Blue */
-    --primary-color: #2563eb;       /* כחול רויאל מודרני */
-    --primary-hover: #1d4ed8;       /* כחול כהה יותר */
-    --accent-color: #3b82f6;        /* כחול בהיר לדגשים */
-    --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e2e8f0 100%);
+    --primary-color: #4F46E5;
+    /* Indigo */
+    --primary-hover: #4338ca;
+    --bg-color: #F3F4F6;
     --card-bg: #ffffff;
-    --text-main: #1e293b;           /* אפור כהה מאוד */
-    --text-secondary: #64748b;      /* אפור בינוני */
-    --border-light: #e2e8f0;
-    --success-color: #10b981;
-    --error-color: #ef4444;
-    
-    /* מידות ועיצוב */
-    --input-radius: 12px;
-    --card-radius: 24px;
-    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-    --shadow-input: 0 2px 4px rgba(0,0,0,0.02);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-color: #1f2937;
+    --input-bg: #f9fafb;
+    --input-border: #e5e7eb;
+    --radius: 12px;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
-/* --- איפוס ועיצוב גלובלי --- */
+html,
 body {
-    font-family: 'Rubik', system-ui, -apple-system, sans-serif;
-    background: var(--bg-gradient);
-    color: var(--text-main);
+    height: 100%;
     margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    /* Modern gradient background */
+    color: var(--text-color);
     direction: rtl;
 }
 
-/* --- הקונטיינר הראשי (הכרטיס) --- */
+/* --- Layout Structure (The "Card" Effect) --- */
+.body-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 15px;
+}
+
 .container {
-    max-width: 550px !important; /* כרטיס צר ואלגנטי יותר */
+    background: var(--card-bg);
     width: 100%;
-    margin: 0 auto;
-    padding: 0;
-}
-
-.main-content {
-    background-color: var(--card-bg);
-    border-radius: var(--card-radius);
-    box-shadow: var(--shadow-soft);
-    padding: 40px;
+    max-width: 600px !important;
+    /* Limiting width for card look */
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 40px !important;
     position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.8);
+    margin: 0 auto;
 }
 
-/* פס קישוט עליון */
-.main-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+/* Resetting legacy containers */
+.main,
+.main-content {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
-/* --- לוגו וכותרת --- */
-.credit-title {
-    text-align: center;
-    margin-bottom: 35px;
-    border: none;
+/* --- Header & Logo Cleanup --- */
+.topRef {
     background: transparent;
+    border: none;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+}
+
+.credit-title {
+    background: transparent;
+    border: none;
     box-shadow: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 0;
 }
 
 .credit-title .logo {
     float: none;
-    display: block;
-    margin: 0 auto 15px;
-    width: 160px;
+    width: 180px;
     height: auto;
-    opacity: 0.9;
-    transition: var(--transition);
+    margin: 0 auto;
 }
 
-.credit-title .logo:hover {
-    opacity: 1;
-    transform: scale(1.02);
-}
-
-#paymentByCC {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-main);
-    letter-spacing: -0.5px;
-    float: none;
-    text-align: center;
-}
-
-/* --- הסתרת אלמנטים מיותרים --- */
-.topRef,
-#creditCardHolderRow,
-#PhoneContainer,
-#EmailAndPhoneRow,
-.footer, /* הסתרת פוטר סטנדרטי לטובת מראה נקי */
-#trash-Address-desc,
-.main-title:empty,
-#phoneHidden,
-#idHidden {
+.credit-title .title,
+h1#paymentByCC,
+h1.text-center {
     display: none !important;
+    /* Hiding redundant titles */
 }
 
-/* --- טאבים (בחירת אמצעי תשלום) --- */
+/* --- Wallet Selection (Tabs) --- */
 #walletButtonsHolder {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 35px;
+    gap: 15px;
+    margin-bottom: 30px;
     padding: 0;
+    flex-wrap: wrap;
 }
 
-.col-sm-2.mobile-four {
-    width: auto !important;
+.col-sm-2.mobile-four.text-2-line {
+    width: auto;
     float: none;
+    margin: 0;
     padding: 0;
 }
 
 .tab-button.pay-btn {
-    width: 110px;
-    height: 80px;
-    background: #f8fafc;
-    border: 2px solid transparent;
-    border-radius: 16px;
+    width: 100px;
+    height: 90px;
+    border-radius: var(--radius);
+    border: 2px solid var(--input-border);
+    background: white;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: none;
-    opacity: 0.7;
 }
 
 .tab-button.pay-btn:hover {
-    background: #fff;
-    border-color: var(--border-light);
-    transform: translateY(-2px);
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.tab-button.pay-btn.tab-button-selected,
-.tab-button.pay-btn.active {
-    background: #eff6ff;
     border-color: var(--primary-color);
-    opacity: 1;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
 }
 
-.tab-button h4 {
-    font-size: 12px;
-    margin-top: 8px;
-    color: var(--text-main);
-    font-weight: 600;
+.tab-button.pay-btn.tab-button-selected {
+    border-color: var(--primary-color);
+    background-color: #EEF2FF;
+    /* Light Indigo */
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
 }
 
 .buttonIcon {
-    max-height: 28px;
-    width: auto;
-    filter: grayscale(100%);
-    transition: var(--transition);
-}
-
-.tab-button.pay-btn.active .buttonIcon,
-.tab-button.pay-btn:hover .buttonIcon {
-    filter: grayscale(0%);
-}
-
-/* --- טופס ושדות --- */
-.form-group {
-    margin-bottom: 24px;
-    display: block !important; /* Override table layout */
-}
-
-.control-label {
-    display: block;
+    width: 32px !important;
+    height: auto;
     margin-bottom: 8px;
-    font-size: 0.9rem;
+}
+
+.tab-button h4 {
+    font-size: 0.85rem;
     font-weight: 500;
-    color: var(--text-secondary);
-    width: 100%;
-    text-align: right;
+    color: var(--text-color);
+    margin: 0;
     padding: 0;
 }
 
-/* הסתרת כוכביות חובה מכוערות - אפשר להוסיף אותן ב-CSS */
-.control-label img {
-    display: none !important;
-}
-.control-label::after {
-    content: '*';
-    color: var(--error-color);
-    margin-right: 4px;
-}
-
-.control-value {
-    display: block;
-    width: 100%;
-    padding: 0;
-}
-
-/* טיפול בטבלאות פנימיות של פלאקארד */
-.control-value table,
-.control-value tr,
-.control-value td {
-    display: block;
-    width: 100%;
-}
-
-.form-control {
-    width: 100%;
-    height: 52px !important;
-    padding: 0 16px;
-    border: 2px solid var(--border-light);
-    border-radius: var(--input-radius);
-    background-color: #fff;
-    font-size: 16px;
-    color: var(--text-main);
-    font-family: 'Rubik', sans-serif;
-    transition: var(--transition);
-    box-shadow: var(--shadow-input);
-    box-sizing: border-box;
-}
-
-.form-control:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-}
-
-/* שדות Dropdown */
-select.form-control {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: left 12px center;
-    background-size: 16px;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-/* --- גריד לשדות (תאריך, ת.ז, CVV) --- */
+/* --- Form Inputs Styling --- */
 .row {
+    margin-left: -10px;
+    margin-right: -10px;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -10px;
 }
 
-.col-sm-6, .col-sm-4, .col-sm-12 {
+.col-sm-6,
+.col-sm-4,
+.col-sm-12 {
     float: none;
     padding: 0 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.control-label {
+    width: 100%;
+    text-align: right;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Icons within labels (Stars/Info) */
+.control-label img {
+    width: 6px !important;
+    /* Making the asterisk smaller */
+    height: 6px !important;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+/* Input Fields */
+.form-control,
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select {
+    width: 100%;
+    height: 48px !important;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid var(--input-border) !important;
+    border-radius: var(--radius) !important;
+    background-color: var(--input-bg) !important;
+    color: var(--text-color);
+    box-shadow: none !important;
+    transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
-.col-sm-6 { width: 50%; }
-.col-sm-12 { width: 100%; }
-.col-sm-4 { width: 33.333%; }
+.form-control:focus,
+input:focus,
+select:focus {
+    border-color: var(--primary-color) !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+    outline: none;
+}
 
-/* --- טיפול מיוחד לתאריך תוקף --- */
+/* Specific Field Adjustments */
 #dateContainer {
     display: flex;
     gap: 10px;
 }
 
-#dateContainer select.form-control {
-    width: 100% !important; /* ניצול מלא של המקום */
-    flex: 1;
+#dateContainer select {
+    width: 100% !important;
 }
 
 #dateContainer .delimiter {
     display: none;
 }
 
-/* --- אייקונים בתוך שדות --- */
-/* לוגו חברת אשראי בתוך השדה */
+/* Credit Card Input Wrapper */
+#creditCardRow .control-value {
+    position: relative;
+}
+
 #brand_icon {
+    position: absolute;
+    left: 10px !important;
     top: 50% !important;
-    left: 12px !important;
-    right: auto !important;
     transform: translateY(-50%);
     height: 24px !important;
     width: auto !important;
-    margin: 0 !important;
-    display: block !important;
-    z-index: 10;
+    z-index: 2;
 }
 
-/* כפתור מידע ל-CVV */
-#info {
-    position: absolute;
-    left: 10px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    opacity: 0.5;
-    background: transparent;
-}
-
-/* --- אזור סכום לתשלום (Total) --- */
+/* Total Amount Display */
 #totalAllRow {
-    background: #f8fafc;
-    border: 1px dashed var(--border-light);
-    border-radius: 16px;
-    padding: 20px;
-    margin: 30px 0;
+    background-color: #F9FAFB;
+    border: 1px dashed var(--primary-color);
+    border-radius: var(--radius);
+    padding: 15px;
+    margin-top: 10px;
     text-align: center;
-}
-
-#totalAllRow .control-label span {
-    font-size: 14px;
-    color: var(--text-secondary);
-    display: block;
-    margin-bottom: 5px;
-}
-
-#totalAllRow .control-group {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-    direction: ltr; /* כדי שהשקל יהיה במקום הנכון */
+    flex-direction: column;
+    align-items: center;
+}
+
+#totalAllRow label {
+    font-size: 0.9rem;
+    color: #6b7280;
 }
 
 #totalAll {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--text-main);
-    background: transparent;
-    border: none;
-    width: auto;
-    padding: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: transparent !important;
+    border: none !important;
+    text-align: center;
     height: auto !important;
-    box-shadow: none;
-    text-align: right;
-    max-width: 150px;
+    padding: 0;
+    width: auto;
+    display: inline-block;
 }
 
 #total_currency {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--text-main);
-    padding-right: 5px;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
-/* --- כפתור תשלום --- */
+#totalAllRow .control-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* --- Submit Button --- */
 .form-group-submit {
     margin-top: 30px;
 }
 
-.btn-submit {
+#submitBtn {
     width: 100%;
-    background: var(--primary-color);
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
     height: 56px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
     border: none;
-    border-radius: var(--btn-radius);
+    border-radius: var(--radius);
     cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: none;
 }
 
-.btn-submit:hover {
-    background: var(--primary-hover);
+#submitBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
 }
 
-.btn-submit:active {
-    transform: translateY(0);
+#submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
 }
 
-/* --- הודעות שגיאה --- */
-.errorRow_Vita, .errorRow {
-    color: var(--error-color);
-    font-size: 12px;
-    margin-top: 5px;
-    font-weight: 500;
-    text-align: right;
+/* --- Footer & Security Icons --- */
+.footer {
+    background: transparent;
+    border: none;
+    margin-top: 20px;
+    padding: 0;
 }
 
-.red-field, .error {
-    border-color: var(--error-color) !important;
-    background-color: #fef2f2 !important;
+.form-group-sup-in {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: 0.3s;
 }
 
-/* --- שיפורי נגישות ואנימציה --- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.form-group-sup-in:hover {
+    opacity: 1;
+    filter: grayscale(0%);
 }
 
-.main-content {
-    animation: fadeIn 0.6s ease-out;
+.sup-lg-ic-1,
+.sup-lg-ic-2,
+.sup-lg-ic-3 {
+    width: 40px !important;
+    height: 40px !important;
+    background-size: contain;
+    background-position: center;
 }
 
-/* --- Mobile Responsive --- */
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
-        align-items: flex-start; /* במובייל, שיתחיל מלמעלה */
-    }
-    
-    .main-content {
-        padding: 25px 20px;
-        border-radius: 20px;
-    }
-
-    .col-sm-6, .col-sm-4 {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    /* סידור תאריך בשורה אחת במובייל */
-    #dateContainer select.form-control {
-        width: 48% !important;
-    }
-    
-    #paymentByCC {
-        font-size: 1.4rem;
-    }
-
-    .tab-button.pay-btn {
-        width: 30%; /* חלוקה שווה */
-        height: 70px;
-    }
-    
-    .tab-button h4 {
-        font-size: 11px;
-    }
+/* --- Error Messages --- */
+.errorRow {
+    background-color: #FEE2E2;
+    color: #DC2626;
+    border-radius: var(--radius);
+    padding: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid #FECACA;
+    margin-bottom: 20px;
 }
 
-/* --- בנק דרופ דאון --- */
-#bankDropdown, #branchDropdown {
-    border-radius: 12px;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+.errorRow_Vita {
+    color: #DC2626;
+    font-size: 0.8rem;
     margin-top: 4px;
-    overflow: hidden;
 }
 
-#bankDropdown a, #branchDropdown a {
-    padding: 12px 16px;
-    font-size: 14px;
-    transition: all 0.2s;
-    border-bottom: 1px solid #f1f5f9;
+.red-field {
+    border-color: #DC2626 !important;
+    background-color: #FEF2F2 !important;
 }
 
-#bankDropdown a:hover, #branchDropdown a:hover {
-    background-color: #f8fafc;
-    color: var(--primary-color);
-    padding-right: 20px; /* אפקט תזוזה קטן */
+/* --- Hide Unwanted Elements --- */
+#AccountNumber,
+/* Hiding Bank transfer details if not active */
+#phoneHidden,
+#idHidden,
+#reset,
+#reset_account {
+    display: none;
+}
+
+/* --- Responsive Fixes --- */
+@media (max-width: 600px) {
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+        padding: 20px !important;
+    }
+
+    .body-content {
+        padding: 0;
+        background: white;
+    }
+
+    .col-sm-6 {
+        width: 100%;
+        /* Force stacking on mobile */
+    }
+
+    #dateContainer {
+        margin-bottom: 10px;
+    }
+}
+
+/* --- Custom Scrollbar for Dropdowns --- */
+.dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
 }
