@@ -1,379 +1,463 @@
- :root {
-     /* צבעים ראשיים לשינוי קל */
-     --primary-color: #007B91;
-     /* צבע כפתורים ודגשים */
-     --primary-dark: #005f70;
-     /* צבע מעבר עכבר */
-     --bg-color: #f4f7f6;
-     /* רקע הדף */
-     --card-bg: #ffffff;
-     /* רקע הטופס */
-     --text-color: #333333;
-     /* צבע טקסט */
-     --border-color: #e0e0e0;
-     /* צבע גבולות */
-     --input-radius: 8px;
-     /* עגלגלות שדות */
-     --btn-radius: 8px;
-     /* עגלגלות כפתורים */
- }
+:root {
+    /* פלטת צבעים מודרנית - Fintech Blue */
+    --primary-color: #2563eb;       /* כחול רויאל מודרני */
+    --primary-hover: #1d4ed8;       /* כחול כהה יותר */
+    --accent-color: #3b82f6;        /* כחול בהיר לדגשים */
+    --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e2e8f0 100%);
+    --card-bg: #ffffff;
+    --text-main: #1e293b;           /* אפור כהה מאוד */
+    --text-secondary: #64748b;      /* אפור בינוני */
+    --border-light: #e2e8f0;
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    
+    /* מידות ועיצוב */
+    --input-radius: 12px;
+    --card-radius: 24px;
+    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+    --shadow-input: 0 2px 4px rgba(0,0,0,0.02);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
- body {
-     font-family: 'Rubik', sans-serif;
-     background-color: var(--bg-color);
-     color: var(--text-color);
-     margin: 0;
-     padding: 20px 0;
-     direction: rtl;
- }
+/* --- איפוס ועיצוב גלובלי --- */
+body {
+    font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+}
 
- /* מירכוז ועיצוב הכרטיס הראשי */
- .container {
-     max-width: 600px;
-     margin: 0 auto;
-     padding: 0 15px;
- }
+/* --- הקונטיינר הראשי (הכרטיס) --- */
+.container {
+    max-width: 550px !important; /* כרטיס צר ואלגנטי יותר */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
 
- .main-content {
-     background-color: var(--card-bg);
-     border-radius: 12px;
-     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-     padding: 25px;
-     margin-top: 20px;
-     border: 1px solid #fff;
- }
+.main-content {
+    background-color: var(--card-bg);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-soft);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.8);
+}
 
- /* לוגו וכותרת */
- .credit-title {
-     text-align: center;
-     margin-bottom: 20px;
-     background: transparent;
- }
+/* פס קישוט עליון */
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
 
- .credit-title .logo {
-     display: inline-block;
-     width: 180px;
-     margin-bottom: 10px;
- }
+/* --- לוגו וכותרת --- */
+.credit-title {
+    text-align: center;
+    margin-bottom: 35px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
 
- .credit-title .logo img {
-     width: 100%;
-     height: auto;
- }
+.credit-title .logo {
+    float: none;
+    display: block;
+    margin: 0 auto 15px;
+    width: 160px;
+    height: auto;
+    opacity: 0.9;
+    transition: var(--transition);
+}
 
- #paymentByCC {
-     font-size: 1.5rem;
-     color: var(--text-color);
-     margin: 0;
-     font-weight: 500;
-     display: block !important;
-     /* אילוץ תצוגה */
-     text-align: center;
- }
+.credit-title .logo:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
 
- /* הסתרת שדות לא רצויים לפי בקשתך */
- #creditCardHolderRow,
- /* שם בעל כרטיס */
- #PhoneContainer,
- /* טלפון */
- #EmailAndPhoneRow,
- /* שורת אימייל/טלפון */
- .topRef
+#paymentByCC {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+    float: none;
+    text-align: center;
+}
 
- /* שורה עליונה אפורה */
-     {
-     display: none !important;
- }
+/* --- הסתרת אלמנטים מיותרים --- */
+.topRef,
+#creditCardHolderRow,
+#PhoneContainer,
+#EmailAndPhoneRow,
+.footer, /* הסתרת פוטר סטנדרטי לטובת מראה נקי */
+#trash-Address-desc,
+.main-title:empty,
+#phoneHidden,
+#idHidden {
+    display: none !important;
+}
 
- /* עיצוב טאבים (כפתורי בחירה) */
- #walletButtonsHolder {
-     display: flex;
-     justify-content: center;
-     gap: 15px;
-     margin-bottom: 30px;
-     flex-wrap: wrap;
- }
+/* --- טאבים (בחירת אמצעי תשלום) --- */
+#walletButtonsHolder {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 35px;
+    padding: 0;
+}
 
- .col-sm-2.mobile-four {
-     width: auto;
-     float: none;
-     padding: 0;
-     margin: 0;
- }
+.col-sm-2.mobile-four {
+    width: auto !important;
+    float: none;
+    padding: 0;
+}
 
- .tab-button.pay-btn {
-     width: 100px;
-     height: 90px;
-     background: #f8f9fa;
-     border: 2px solid transparent;
-     border-radius: var(--btn-radius);
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     cursor: pointer;
-     transition: all 0.3s ease;
-     box-shadow: none;
- }
+.tab-button.pay-btn {
+    width: 110px;
+    height: 80px;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: none;
+    opacity: 0.7;
+}
 
- .tab-button.pay-btn:hover {
-     background: #e9ecef;
- }
+.tab-button.pay-btn:hover {
+    background: #fff;
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
- .tab-button.pay-btn.tab-button-selected,
- .tab-button.pay-btn.active {
-     /* תמיכה במחלקות של פלאקארד */
-     background: #e6f7f9;
-     border-color: var(--primary-color);
- }
+.tab-button.pay-btn.tab-button-selected,
+.tab-button.pay-btn.active {
+    background: #eff6ff;
+    border-color: var(--primary-color);
+    opacity: 1;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+}
 
- .tab-button h4 {
-     font-size: 13px;
-     margin: 10px 0 0 0;
-     font-weight: 500;
-     color: var(--text-color);
- }
+.tab-button h4 {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--text-main);
+    font-weight: 600;
+}
 
- .buttonIcon {
-     max-height: 35px;
-     width: auto;
- }
+.buttonIcon {
+    max-height: 28px;
+    width: auto;
+    filter: grayscale(100%);
+    transition: var(--transition);
+}
 
- /* עיצוב שדות קלט (Inputs) */
- .form-group {
-     margin-bottom: 20px;
- }
+.tab-button.pay-btn.active .buttonIcon,
+.tab-button.pay-btn:hover .buttonIcon {
+    filter: grayscale(0%);
+}
 
- .control-label {
-     display: block;
-     margin-bottom: 8px;
-     font-weight: 500;
-     font-size: 14px;
-     color: var(--text-color);
-     width: 100%;
-     text-align: right;
- }
+/* --- טופס ושדות --- */
+.form-group {
+    margin-bottom: 24px;
+    display: block !important; /* Override table layout */
+}
 
- .form-control {
-     width: 100%;
-     height: 48px;
-     padding: 10px 15px;
-     border: 1px solid var(--border-color);
-     border-radius: var(--input-radius);
-     font-size: 16px;
-     background-color: #fff;
-     box-shadow: none;
-     transition: border-color 0.3s;
-     font-family: 'Rubik', sans-serif;
-     box-sizing: border-box;
-     /* חשוב למניעת גלישה */
- }
+.control-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    width: 100%;
+    text-align: right;
+    padding: 0;
+}
 
- .form-control:focus {
-     border-color: var(--primary-color);
-     outline: none;
-     box-shadow: 0 0 0 3px rgba(0, 123, 145, 0.1);
- }
+/* הסתרת כוכביות חובה מכוערות - אפשר להוסיף אותן ב-CSS */
+.control-label img {
+    display: none !important;
+}
+.control-label::after {
+    content: '*';
+    color: var(--error-color);
+    margin-right: 4px;
+}
 
- /* סידור שורות ועמודות */
- .row {
-     display: flex;
-     flex-wrap: wrap;
-     margin: 0 -10px;
- }
+.control-value {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
 
- .col-sm-6,
- .col-sm-4,
- .col-sm-12 {
-     padding: 0 10px;
-     box-sizing: border-box;
-     float: none;
- }
+/* טיפול בטבלאות פנימיות של פלאקארד */
+.control-value table,
+.control-value tr,
+.control-value td {
+    display: block;
+    width: 100%;
+}
 
- .col-sm-6 {
-     width: 50%;
- }
+.form-control {
+    width: 100%;
+    height: 52px !important;
+    padding: 0 16px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--input-radius);
+    background-color: #fff;
+    font-size: 16px;
+    color: var(--text-main);
+    font-family: 'Rubik', sans-serif;
+    transition: var(--transition);
+    box-shadow: var(--shadow-input);
+    box-sizing: border-box;
+}
 
- .col-sm-4 {
-     width: 33.33%;
- }
+.form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
 
- .col-sm-12 {
-     width: 100%;
- }
+/* שדות Dropdown */
+select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    background-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+}
 
- /* שדות תאריך */
- #dateContainer {
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
- }
+/* --- גריד לשדות (תאריך, ת.ז, CVV) --- */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
 
- #dateContainer select.form-control {
-     width: 48%;
-     float: none;
- }
+.col-sm-6, .col-sm-4, .col-sm-12 {
+    float: none;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
 
- #dateContainer .delimiter {
-     display: none;
-     /* הסתרת הסלאש המקורי */
- }
+.col-sm-6 { width: 50%; }
+.col-sm-12 { width: 100%; }
+.col-sm-4 { width: 33.333%; }
 
- /* עיצוב סכום לתשלום */
- #totalAllRow {
-     background-color: #f0f8ff;
-     border: 1px dashed var(--primary-color);
-     border-radius: var(--btn-radius);
-     text-align: center;
-     padding: 15px;
-     margin-bottom: 25px;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
- }
+/* --- טיפול מיוחד לתאריך תוקף --- */
+#dateContainer {
+    display: flex;
+    gap: 10px;
+}
 
- #totalAllRow .control-label span {
-     font-size: 16px;
-     color: #555;
- }
+#dateContainer select.form-control {
+    width: 100% !important; /* ניצול מלא של המקום */
+    flex: 1;
+}
 
- #totalAllRow .control-value {
-     width: auto;
- }
+#dateContainer .delimiter {
+    display: none;
+}
 
- #totalAllRow .control-group {
-     display: flex;
-     align-items: center;
-     justify-content: center;
- }
+/* --- אייקונים בתוך שדות --- */
+/* לוגו חברת אשראי בתוך השדה */
+#brand_icon {
+    top: 50% !important;
+    left: 12px !important;
+    right: auto !important;
+    transform: translateY(-50%);
+    height: 24px !important;
+    width: auto !important;
+    margin: 0 !important;
+    display: block !important;
+    z-index: 10;
+}
 
- #totalAll {
-     font-size: 28px;
-     font-weight: 700;
-     color: var(--primary-color);
-     background: transparent;
-     border: none;
-     width: auto;
-     text-align: center;
-     padding: 0;
-     height: auto;
- }
+/* כפתור מידע ל-CVV */
+#info {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.5;
+    background: transparent;
+}
 
- #total_currency {
-     font-size: 28px;
-     font-weight: 700;
-     color: var(--primary-color);
-     padding: 0 5px;
- }
+/* --- אזור סכום לתשלום (Total) --- */
+#totalAllRow {
+    background: #f8fafc;
+    border: 1px dashed var(--border-light);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 30px 0;
+    text-align: center;
+}
 
- /* כפתור תשלום */
- .btn-submit {
-     width: 100%;
-     background-color: var(--primary-color);
-     color: white;
-     font-size: 18px;
-     font-weight: 500;
-     height: 55px;
-     border: none;
-     border-radius: var(--btn-radius);
-     cursor: pointer;
-     transition: background-color 0.3s;
-     box-shadow: 0 4px 10px rgba(0, 123, 145, 0.2);
- }
+#totalAllRow .control-label span {
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 5px;
+}
 
- .btn-submit:hover {
-     background-color: var(--primary-dark);
- }
+#totalAllRow .control-group {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    direction: ltr; /* כדי שהשקל יהיה במקום הנכון */
+}
 
- /* --- עיצוב מיוחד לדרופ-דאון של הבנק --- */
- #AccountNumber .dropdown {
-     position: relative;
-     width: 100%;
- }
+#totalAll {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-main);
+    background: transparent;
+    border: none;
+    width: auto;
+    padding: 0;
+    height: auto !important;
+    box-shadow: none;
+    text-align: right;
+    max-width: 150px;
+}
 
- #bankDropdown,
- #branchDropdown {
-     width: 100%;
-     background: #fff;
-     border: 1px solid var(--border-color);
-     border-radius: var(--input-radius);
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-     position: absolute;
-     top: 100%;
-     left: 0;
-     z-index: 100;
-     max-height: 200px;
-     overflow-y: auto;
-     margin-top: 5px;
- }
+#total_currency {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-main);
+    padding-right: 5px;
+}
 
- #bankDropdown a,
- #branchDropdown a {
-     display: block;
-     padding: 10px 15px;
-     color: var(--text-color);
-     text-decoration: none;
-     border-bottom: 1px solid #f9f9f9;
- }
+/* --- כפתור תשלום --- */
+.form-group-submit {
+    margin-top: 30px;
+}
 
- #bankDropdown a:hover,
- #branchDropdown a:hover {
-     background-color: #f0f8ff;
-     color: var(--primary-color);
- }
+.btn-submit {
+    width: 100%;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    height: 56px;
+    border: none;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
- /* כפתור הסבר CVV */
- #info {
-     background: none;
-     border: none;
-     padding: 0;
-     margin-right: 5px;
-     vertical-align: middle;
-     cursor: pointer;
- }
+.btn-submit:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
 
- /* פוטר */
- .footer {
-     background: transparent;
-     margin-top: 20px;
-     text-align: center;
- }
+.btn-submit:active {
+    transform: translateY(0);
+}
 
- .form-group-sup-in {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     gap: 15px;
-     opacity: 0.7;
- }
+/* --- הודעות שגיאה --- */
+.errorRow_Vita, .errorRow {
+    color: var(--error-color);
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+    text-align: right;
+}
 
- .sup-lg-ic-1,
- .sup-lg-ic-2,
- .sup-lg-ic-3 {
-     display: inline-block;
-     width: 60px;
-     height: 35px;
-     background-size: contain;
-     background-repeat: no-repeat;
-     background-position: center;
- }
+.red-field, .error {
+    border-color: var(--error-color) !important;
+    background-color: #fef2f2 !important;
+}
 
- /* התאמה למובייל */
- @media (max-width: 600px) {
+/* --- שיפורי נגישות ואנימציה --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-     .col-sm-6,
-     .col-sm-4 {
-         width: 100%;
-         margin-bottom: 10px;
-     }
+.main-content {
+    animation: fadeIn 0.6s ease-out;
+}
 
-     #dateContainer select.form-control {
-         width: 48%;
-         /* לשמור על תאריך בשורה אחת */
-     }
+/* --- Mobile Responsive --- */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        align-items: flex-start; /* במובייל, שיתחיל מלמעלה */
+    }
+    
+    .main-content {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
 
-     .tab-button.pay-btn {
-         width: 90px;
-         height: 80px;
-     }
- }
+    .col-sm-6, .col-sm-4 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* סידור תאריך בשורה אחת במובייל */
+    #dateContainer select.form-control {
+        width: 48% !important;
+    }
+    
+    #paymentByCC {
+        font-size: 1.4rem;
+    }
+
+    .tab-button.pay-btn {
+        width: 30%; /* חלוקה שווה */
+        height: 70px;
+    }
+    
+    .tab-button h4 {
+        font-size: 11px;
+    }
+}
+
+/* --- בנק דרופ דאון --- */
+#bankDropdown, #branchDropdown {
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#bankDropdown a, #branchDropdown a {
+    padding: 12px 16px;
+    font-size: 14px;
+    transition: all 0.2s;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+#bankDropdown a:hover, #branchDropdown a:hover {
+    background-color: #f8fafc;
+    color: var(--primary-color);
+    padding-right: 20px; /* אפקט תזוזה קטן */
+}
